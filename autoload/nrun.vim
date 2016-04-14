@@ -1,5 +1,10 @@
+" trim excess whitespace
+function nrun#StrTrim(txt)
+  return substitute(a:txt, '^\n*\s*\(.\{-}\)\n*\s*$', '\1', '')
+endfunction
+
 " check for locally-installed executable before falling back to 'which'
-function nlef#Nwhich(cmd)
+function nrun#Which(cmd)
 	let l:cwd = getcwd()
 	let l:rp = fnamemodify('/', ':p')
 	let l:hp = fnamemodify('~/', ':p')
@@ -12,6 +17,15 @@ function nlef#Nwhich(cmd)
 		endif
 		let l:cwd = resolve(l:cwd . '/..')
 	endwhile
-	return system('which ' . a:cmd)
+	return nrun#StrTrim(system('which ' . a:cmd))
+
 endfunction
 
+function! nrun#Exec(cmd)
+	let l:exec = nrun#Which(a:cmd)
+	if match(l:exec, 'not found$') != -1
+		throw 'No command found'
+	else
+		return system(l:exec)
+	endif
+endfunction
