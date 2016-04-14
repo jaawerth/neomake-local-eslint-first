@@ -1,5 +1,5 @@
 " check for locally-installed executable before falling back to 'which'
-function Nwhich(cmd)
+function nlef#Nwhich(cmd)
 	let l:cwd = getcwd()
 	let l:rp = fnamemodify('/', ':p')
 	let l:hp = fnamemodify('~/', ':p')
