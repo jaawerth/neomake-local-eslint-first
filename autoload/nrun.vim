@@ -31,7 +31,7 @@ function! nrun#Which(cmd, ...)
 		endif
 		unlet l:optType
 	endif
-	let l:cwd = getcwd()
+	let l:cwd = expand("%:p:h")
 	let l:rp = fnamemodify('/', ':p')
 	let l:hp = fnamemodify('~/', ':p')
 	while l:cwd != l:hp && l:cwd != l:rp
