@@ -39,8 +39,6 @@ function! nrun#Which(cmd, ...)
 			let l:execPath = fnamemodify(l:cwd . '/node_modules/.bin/' . a:cmd, ':p')
 			if executable(l:execPath)
 				return l:execPath
-			else
-				break
 			endif
 		endif
 		let l:cwd = resolve(l:cwd . '/..')
